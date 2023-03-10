@@ -1,9 +1,6 @@
-// import logo from './logo.svg';
 import { Provider } from 'react-redux';
-// import store from './Redux/store';
 import store from './Redux/store';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
 
 import './App.css';
 import About from './components/About/About.component';
@@ -14,6 +11,8 @@ import ProductsContainer from './components/ProductsContainer/ProductsContainer.
 import ProductDetails from './components/Product/ProductDetails.component';
 import CartPageContainer from './components/CartPage/CartPage.component';
 import CategoryItemsContainer from './components/CategoryType/CategoryType.component';
+
+
 
 function App() {
   return (

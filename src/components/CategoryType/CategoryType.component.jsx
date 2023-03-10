@@ -1,19 +1,22 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { fetchCategoryTypesSearch } from '../../Redux/categoryItems/categoryItemsAction'
 
-function CategoryItemsContainer({ categoryItemsData, fetchCategoryTypesSearch, listShown }) {
+function CategoryItemsContainer({ listShown }) {
 
-    // const { categoryName } = useParams()
-    // const categoryTitle = categoryName
+    const categoryItemsData = useSelector((state) => state.categoryItems)
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        fetchCategoryTypesSearch(listShown)
+        dispatch(fetchCategoryTypesSearch(listShown))
     }, [listShown])
+
+
 
     return categoryItemsData.loading ? (
         <h2>
@@ -43,18 +46,33 @@ function CategoryItemsContainer({ categoryItemsData, fetchCategoryTypesSearch, l
     )
 }
 
-
-const mapStateToProps = state => {
-    return {
-        categoryItemsData: state.categoryItems,
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCategoryTypesSearch: (categoryName) => dispatch(fetchCategoryTypesSearch(categoryName)),
-    }
-}
+export default CategoryItemsContainer
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryItemsContainer)
+
+
+// import { connect } from 'react-redux'
+
+// categoryItemsData, fetchCategoryTypesSearch,
+// const { categoryName } = useParams()
+// const categoryTitle = categoryName
+
+// useEffect(() => {
+//     fetchCategoryTypesSearch(listShown)
+// }, [listShown])
+
+
+// const mapStateToProps = state => {
+//     return {
+//         categoryItemsData: state.categoryItems,
+//     }
+// }
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         fetchCategoryTypesSearch: (categoryName) => dispatch(fetchCategoryTypesSearch(categoryName)),
+//     }
+// }
+
+
+// export default connect(mapStateToProps, mapDispatchToProps)(CategoryItemsContainer)

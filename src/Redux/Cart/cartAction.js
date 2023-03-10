@@ -1,34 +1,58 @@
-import { 
-    ADD_TO_CART, 
+import {
+    ADD_TO_CART,
     REMOVE_FROM_CART,
-    ADJUST_QUANTITY
+    INCREASE_CART_QUANTITY,
+    DECREASE_CART_QUANTITY,
+    CLEAR_CART
 } from "./cartTypes";
 
 
-export const addToCart = (itemId) => {
+export const addToCart = (product, quantity) => {
+
     return {
         type: ADD_TO_CART,
-        payload : {
-            id: itemId
+        payload: {
+            product,
+            quantity
         }
     }
-}
+};
 
-export const removeFromCart = (itemId) => {
-    return{
+export const removeFromCart = (productId) => {
+
+    return {
         type: REMOVE_FROM_CART,
         payload: {
-            id: itemId
+            productId: productId
         }
     }
-}
+};
 
-export const adjustQuantity = (itemId, value) => {
-    return{
-        type: ADJUST_QUANTITY,
+export const increaseCartQuantity = (productId, quantity) => {
+
+    return {
+        type: INCREASE_CART_QUANTITY,
         payload: {
-            id: itemId,
-            quantity: value
+            productId,
+            quantity: quantity + 1
         }
     }
-}
+};
+
+export const decreaseCartQuantity = (productId, quantity) => {
+
+    return {
+        type: DECREASE_CART_QUANTITY,
+        payload: {
+            productId,
+            quantity: quantity - 1
+        }
+    }
+};
+
+export const clearCart = () => {
+
+    return {
+        type: CLEAR_CART,
+    }
+};

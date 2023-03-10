@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuid } from 'uuid';
 import { Link } from 'react-router-dom';
 
 import { fetchCategoriesSearch } from '../../Redux/categories/categoriesActions'
 
-function CategoriesContainer({ categoryListData, fetchCategoriesList, settingListShown }) {
+function CategoriesContainer({ settingListShown }) {
+
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        fetchCategoriesList()
+        dispatch(fetchCategoriesSearch())
     }, [])
+
+    const categoryListData = useSelector(state => state.categories)
+
+
 
     return categoryListData.loading ? (
         <h2>
@@ -28,7 +34,7 @@ function CategoriesContainer({ categoryListData, fetchCategoriesList, settingLis
                         categoryListData.categoriesList &&
                         categoryListData.categoriesList.map(categoryName =>
                             <p key={uuid()} onClick={() => settingListShown(categoryName)}>{categoryName}</p>)
-                            // <Link key={uuid()} to={`/categories/${categoryName}`}> <p onClick={() => settingListShown(categoryName)}>{categoryName}</p></Link>
+                        // <Link key={uuid()} to={`/categories/${categoryName}`}> <p onClick={() => settingListShown(categoryName)}>{categoryName}</p></Link>
                     }
                 </div>
             </div>
@@ -37,17 +43,35 @@ function CategoriesContainer({ categoryListData, fetchCategoriesList, settingLis
 }
 
 
-const mapStateToProps = state => {
-    return {
-        categoryListData: state.categories,
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        fetchCategoriesList: () => dispatch(fetchCategoriesSearch()),
-    }
-}
+export default CategoriesContainer
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)
+
+
+// import { Connect } from 'react-redux';
+
+// GOTTEN WHEN I WAS USING MAP STATE TO PROPS AND MAP DISPATCH TO PROPS
+// categoryListData, fetchCategoriesList,
+
+// useEffect(() => {
+//     fetchCategoriesList()
+//     console.log("categories", categoryListDatas)
+// }, [])
+
+
+
+// const mapStateToProps = state => {
+//     return {
+//         categoryListData: state.categories,
+//     }
+// }
+
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         fetchCategoriesList: () => dispatch(fetchCategoriesSearch()),
+//     }
+// }
+
+
+// export default connect(mapStateToProps, mapDispatchToProps)(CategoriesContainer)

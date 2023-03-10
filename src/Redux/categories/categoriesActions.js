@@ -7,6 +7,7 @@ import {
 } from "./categoriesTypes";
 
 
+
 export const fetchCategoriesRequest = () => {
     return{
         type: FETCH_CATEGORIES_REQUEST
